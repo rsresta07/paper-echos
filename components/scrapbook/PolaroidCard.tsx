@@ -22,34 +22,46 @@ export const PolaroidCard: React.FC<PolaroidCardProps> = ({ memory }) => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            // Attempt unmuted play first
+            // Play from the beginning when video enters view
+            try {
+              videoEl.currentTime = 0;
+            } catch {
+              // Ignore if element is not ready
+            }
             videoEl.muted = false;
+            videoEl.volume = 1.0;
+
             videoEl.play().catch(() => {
-              // Browser blocked unmuted autoplay on initial render/reload;
-              // play muted, but setup event listeners to unmute on user interaction
+              // If unmuted autoplay is blocked by browser policy on initial load,
+              // play muted first until user interacts with the page
               videoEl.muted = true;
               videoEl.play().catch(() => {});
             });
           } else {
             videoEl.pause();
+            try {
+              videoEl.currentTime = 0;
+            } catch {
+              // Ignore if element is not ready
+            }
           }
         });
       },
       { threshold: 0.3 }
     );
 
-    // Unmute video on any gesture if it was muted due to browser policy
+    // Gesture listener to unmute video once user interacts with page
     const unlockVideoSound = () => {
       if (videoEl && videoEl.muted) {
         videoEl.muted = false;
         videoEl.volume = 1.0;
       }
     };
-    window.addEventListener('click', unlockVideoSound, { capture: true });
-    window.addEventListener('touchstart', unlockVideoSound, { capture: true });
-    window.addEventListener('pointerdown', unlockVideoSound, { capture: true });
-    window.addEventListener('mousemove', unlockVideoSound, { capture: true });
-    window.addEventListener('scroll', unlockVideoSound, { capture: true });
+
+    window.addEventListener('click', unlockVideoSound, { once: true, capture: true });
+    window.addEventListener('touchstart', unlockVideoSound, { once: true, capture: true });
+    window.addEventListener('pointerdown', unlockVideoSound, { once: true, capture: true });
+    window.addEventListener('keydown', unlockVideoSound, { once: true, capture: true });
 
     observer.observe(videoEl);
     return () => {
@@ -57,8 +69,7 @@ export const PolaroidCard: React.FC<PolaroidCardProps> = ({ memory }) => {
       window.removeEventListener('click', unlockVideoSound, { capture: true });
       window.removeEventListener('touchstart', unlockVideoSound, { capture: true });
       window.removeEventListener('pointerdown', unlockVideoSound, { capture: true });
-      window.removeEventListener('mousemove', unlockVideoSound, { capture: true });
-      window.removeEventListener('scroll', unlockVideoSound, { capture: true });
+      window.removeEventListener('keydown', unlockVideoSound, { capture: true });
     };
   }, [memory.type, activePhotoIndex]);
 

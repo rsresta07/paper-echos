@@ -9,58 +9,57 @@ export const MusicPlayer: React.FC = () => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   React.useEffect(() => {
-    const playAudio = () => {
-      if (audioRef.current) {
-        audioRef.current.volume = 0.8;
-        audioRef.current
-          .play()
-          .then(() => {
-            setIsPlaying(true);
-            setHasAudio(true);
-          })
-          .catch((err) => {
-            console.log("Autoplay waiting for user interaction:", err);
-          });
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    const playAudio = async () => {
+      try {
+        audio.volume = 0.8;
+        await audio.play();
+        setIsPlaying(true);
+        setHasAudio(true);
+      } catch (err) {
+        console.log("Autoplay waiting for user interaction:", err);
+        setIsPlaying(false);
       }
     };
 
-    // Attempt autoplay immediately
+    // Attempt to start audio from the beginning on mount
+    audio.currentTime = 0;
     playAudio();
 
-    // Browser policy fallback: unlock and play audio on ANY user gesture (movement, tap, scroll, click) after reload
-    const handleGesture = () => {
-      if (audioRef.current && audioRef.current.paused) {
+    // One-time gesture listener for browsers blocking unmuted autoplay on initial load/reload
+    const handleFirstGesture = () => {
+      if (audio && audio.paused) {
+        audio.currentTime = 0;
         playAudio();
       }
     };
 
-    window.addEventListener('click', handleGesture, { capture: true });
-    window.addEventListener('touchstart', handleGesture, { capture: true });
-    window.addEventListener('pointerdown', handleGesture, { capture: true });
-    window.addEventListener('mousemove', handleGesture, { capture: true, once: true });
-    window.addEventListener('keydown', handleGesture, { capture: true });
-    window.addEventListener('scroll', handleGesture, { capture: true, once: true });
-    window.addEventListener('focus', handleGesture, { capture: true });
+    window.addEventListener('click', handleFirstGesture, { once: true, capture: true });
+    window.addEventListener('touchstart', handleFirstGesture, { once: true, capture: true });
+    window.addEventListener('pointerdown', handleFirstGesture, { once: true, capture: true });
+    window.addEventListener('keydown', handleFirstGesture, { once: true, capture: true });
 
     return () => {
-      window.removeEventListener('click', handleGesture, { capture: true });
-      window.removeEventListener('touchstart', handleGesture, { capture: true });
-      window.removeEventListener('pointerdown', handleGesture, { capture: true });
-      window.removeEventListener('mousemove', handleGesture, { capture: true });
-      window.removeEventListener('keydown', handleGesture, { capture: true });
-      window.removeEventListener('scroll', handleGesture, { capture: true });
-      window.removeEventListener('focus', handleGesture, { capture: true });
+      window.removeEventListener('click', handleFirstGesture, { capture: true });
+      window.removeEventListener('touchstart', handleFirstGesture, { capture: true });
+      window.removeEventListener('pointerdown', handleFirstGesture, { capture: true });
+      window.removeEventListener('keydown', handleFirstGesture, { capture: true });
     };
   }, []);
 
   const toggleMusic = () => {
-    if (!audioRef.current) return;
+    const audio = audioRef.current;
+    if (!audio) return;
 
     if (isPlaying) {
-      audioRef.current.pause();
+      audio.pause();
       setIsPlaying(false);
     } else {
-      audioRef.current
+      audio.currentTime = 0; // Play from the beginning when turning on
+      audio.volume = 0.8;
+      audio
         .play()
         .then(() => {
           setIsPlaying(true);
