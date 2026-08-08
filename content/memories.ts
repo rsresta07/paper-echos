@@ -27,7 +27,7 @@ export const MEMORIES: MemoryItem[] = [
     caption: "You weren't ready for this picture, which makes it 100x better than any posed photo.",
     date: "Day 1 of shenanigans",
     location: "Somewhere silly",
-    mediaUrl: "/media/images/swariya-candid.jpg", // [ADD FUNNY PHOTO]
+    mediaUrl: "/media/images/candid.jpg", // [ADD FUNNY PHOTO]
     placeholderLabel: "[ADD FUNNY CANDID PHOTO]",
     mediaType: "portrait",
     rotation: -3,
@@ -53,7 +53,7 @@ export const MEMORIES: MemoryItem[] = [
     title: "The Mid-Bite Moment",
     caption: "Catching you off guard while eating is my greatest achievement in life.",
     date: "Foodie adventure",
-    mediaUrl: "/media/images/swariya-food.jpg", // [ADD FUNNY PHOTO]
+    mediaUrl: "/media/images/food.jpg", // [ADD FUNNY PHOTO]
     placeholderLabel: "[ADD FUNNY EATING/SNACK PHOTO]",
     mediaType: "landscape",
     rotation: 4,
@@ -69,7 +69,7 @@ export const MEMORIES: MemoryItem[] = [
     title: "The Unfiltered Laugh",
     caption: "The exact moment you couldn't stop laughing at something completely stupid.",
     date: "Best video clip ever",
-    mediaUrl: "/media/videos/swariya-unfiltered-laughter.mp4", // [ADD VIDEO]
+    mediaUrl: "/media/videos/unfiltered-laughter.mp4", // [ADD VIDEO]
     placeholderLabel: "[ADD SHORT FUNNY VIDEO CLIP]",
     mediaType: "portrait",
     rotation: -2,
@@ -95,25 +95,25 @@ export const MEMORIES: MemoryItem[] = [
     date: "Captured live",
     items: [
       {
-        mediaUrl: "/media/images/swariya-expression-1.jpg",
+        mediaUrl: "/media/images/expression-1.jpg",
         title: "Kahi pe til hai kahi pe nishana",
         caption: "Targeting hearts with that sneaky, subtle glance 😉",
         date: "Captured live"
       },
       {
-        mediaUrl: "/media/images/swariya-expression-2.jpg",
+        mediaUrl: "/media/images/expression-2.jpg",
         title: "They not like us.",
         caption: "The smile + filter combo. Devastatingly effective.",
         date: `Classic ${process.env.NEXT_PUBLIC_RECIPIENT_NAME || 'memory'} moment`
       },
       {
-        mediaUrl: "/media/images/swariya-expression-3.jpg",
+        mediaUrl: "/media/images/expression-3.jpg",
         title: "The Unfiltered Smirk",
         caption: "I love this person soooo much.",
         date: "Unforgettable"
       },
       {
-        mediaUrl: "/media/images/swariya-expression-4.jpg",
+        mediaUrl: "/media/images/expression-4.jpg",
         title: "Thumbs up",
         caption: `Approved by ${process.env.NEXT_PUBLIC_RECIPIENT_NAME || 'You'} 👍 (100% certified cute)`,
         date: "Iconic moment"
@@ -135,7 +135,7 @@ export const MEMORIES: MemoryItem[] = [
     caption: "The look you gave at that moment made me forget my surrounding.",
     date: "Spring Afternoon",
     location: "Somewhere",
-    mediaUrl: "/media/images/swariya-stare.jpg", // [ADD MEMORY PHOTO]
+    mediaUrl: "/media/images/stare.jpg", // [ADD MEMORY PHOTO]
     placeholderLabel: "[ADD BEAUTIFUL/SUNSET PHOTO]",
     mediaType: "landscape",
     rotation: -2,
@@ -150,7 +150,7 @@ export const MEMORIES: MemoryItem[] = [
     title: "Puddle Splashes & Rainy Walks",
     caption: "Walking together in the rain while you intentionally splash water all over me with your legs 🌊☔",
     date: "A rainy day",
-    mediaUrl: "/media/videos/swariya-rainy.mp4", // [ADD VIDEO]
+    mediaUrl: "/media/videos/rainy.mp4", // [ADD VIDEO]
     placeholderLabel: "[ADD SWEET VIDEO OR SCENIC CLIP]",
     mediaType: "landscape",
     rotation: 2,
@@ -175,7 +175,7 @@ export const MEMORIES: MemoryItem[] = [
     title: "My Favorite Smile",
     caption: "If I could preserve one single expression for the rest of my life, it would be this one right here.",
     date: "Unforgettable Day",
-    mediaUrl: "/media/images/swariya-smile.jpeg", // [ADD PERSONAL PHOTO]
+    mediaUrl: "/media/images/smile.jpeg", // [ADD PERSONAL PHOTO]
     placeholderLabel: "[ADD FAVORITE PORTRAIT PHOTO OF HER]",
     mediaType: "portrait",
     rotation: 1,

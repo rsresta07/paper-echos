@@ -25,12 +25,13 @@ To ensure the surprise remains completely secret:
 3. **Web Audio Unlock**: Submitting the login form warms up browser `AudioContext` to enable unmuted video & background music playback seamlessly without browser restrictions.
 4. **Client Security**: Passcodes are **never** exposed in client-side JS bundles.
 
-### Changing the Passcode
+### Changing the Environment Variables & Passcode
 Update `.env.local` (or Vercel Environment Variables in production):
 
 ```env
 SITE_PASSCODE=your_custom_secret_passcode
 JWT_SECRET=your_random_secret_jwt_signing_key
+NEXT_PUBLIC_RECIPIENT_NAME=NameOfRecipient
 ```
 
 ---
@@ -161,6 +162,7 @@ Open `content/quotes.ts` and add quotes under the appropriate category (`said`, 
 3. Under **Environment Variables**, add:
    - `SITE_PASSCODE`: Set your secret passcode.
    - `JWT_SECRET`: Set a long random string.
+   - `NEXT_PUBLIC_RECIPIENT_NAME`: Set the name of the recipient (e.g. `Swariya`).
 4. Deploy! Your deployed URL will look like `https://paper-echoes.vercel.app` — giving away zero details about the surprise.
 
 ---
