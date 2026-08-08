@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import confetti from 'canvas-confetti';
 import { BIRTHDAY_MESSAGE } from '@/content/memories';
-import { Tape, Doodle, Stamp } from './Decorations';
+import { Tape, Doodle, Stamp, SunflowerSticker } from './Decorations';
 import { SunflowerIcon } from '@/components/ui/SunflowerIcon';
 import { Heart, Sparkles, Gift } from 'lucide-react';
 
@@ -40,6 +40,10 @@ export const BirthdayReveal: React.FC = () => {
         <div className="bg-gradient-to-br from-amber-100 to-rose-100 border-2 border-dashed border-rose-300 p-8 rounded-lg scrapbook-shadow text-center relative overflow-hidden">
           <Tape color="bg-yellow-300/90 border-yellow-400" position="top-center" />
           
+          <div className="absolute top-3 right-3 z-10">
+            <SunflowerSticker size={48} rotation="rotate-12" />
+          </div>
+
           <div className="inline-flex p-4 bg-white/80 rounded-full shadow-sm mb-4 text-rose-500 animate-bounce">
             <Gift className="w-10 h-10" />
           </div>

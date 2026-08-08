@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Lock, KeyRound, ArrowRight, ShieldCheck } from 'lucide-react';
-import { Stamp, Tape } from '@/components/scrapbook/Decorations';
+import { Stamp, Tape, SunflowerSticker } from '@/components/scrapbook/Decorations';
 import { SunflowerIcon } from '@/components/ui/SunflowerIcon';
 
 export default function LoginPage() {
@@ -52,13 +52,16 @@ export default function LoginPage() {
   return (
     <main className="min-h-screen paper-texture flex flex-col items-center justify-center p-4">
       {/* Neutral password card - completely unrevealing */}
-      <div className="relative w-full max-w-md bg-amber-50/90 border border-amber-200/80 p-8 rounded-lg scrapbook-shadow">
+      <div className="relative w-full max-w-md bg-amber-50/90 border border-amber-200/80 p-8 rounded-lg scrapbook-shadow overflow-hidden">
         <Tape color="bg-amber-200/90 border-amber-300" position="top-center" />
+
+        <div className="absolute top-3 right-3 z-10">
+          <SunflowerSticker size={40} rotation="rotate-12" />
+        </div>
 
         <div className="text-center mb-6">
           <div className="inline-flex items-center gap-2 p-3 bg-amber-100/80 rounded-full text-amber-800 mb-3 border border-amber-300/80">
             <Lock className="w-5 h-5" />
-            <SunflowerIcon size={24} className="animate-spin-slow" />
           </div>
 
           <Stamp text="PRIVATE ARCHIVE" color="border-amber-700 text-amber-800" className="mb-3" />

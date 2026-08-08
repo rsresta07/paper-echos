@@ -1,6 +1,7 @@
 "use client";
 
 import React from 'react';
+import { SunflowerIcon } from '@/components/ui/SunflowerIcon';
 
 interface TapeProps {
   color?: string;
@@ -78,5 +79,17 @@ export const Doodle: React.FC<{ type?: 'heart' | 'arrow' | 'star' | 'sparkle' | 
       <line x1="9" y1="9" x2="9.01" y2="9" />
       <line x1="15" y1="9" x2="15.01" y2="9" />
     </svg>
+  );
+};
+
+export const SunflowerSticker: React.FC<{ size?: number; className?: string; rotation?: string }> = ({
+  size = 48,
+  className = "",
+  rotation = "rotate-6"
+}) => {
+  return (
+    <div className={`inline-block transform ${rotation} filter drop-shadow-md transition-transform hover:scale-110 cursor-pointer ${className}`}>
+      <SunflowerIcon size={size} />
+    </div>
   );
 };

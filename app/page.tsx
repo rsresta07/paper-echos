@@ -7,10 +7,9 @@ import { QUOTES } from '@/content/quotes';
 import { PolaroidCard } from '@/components/scrapbook/PolaroidCard';
 import { QuoteCard } from '@/components/scrapbook/QuoteCard';
 import { BirthdayReveal } from '@/components/scrapbook/BirthdayReveal';
-import { Tape, Doodle, Stamp } from '@/components/scrapbook/Decorations';
+import { Tape, Doodle, Stamp, SunflowerSticker } from '@/components/scrapbook/Decorations';
 import { Navbar } from '@/components/navigation/Navbar';
 import { MusicPlayer } from '@/components/navigation/MusicPlayer';
-import { SunflowerPetals } from '@/components/effects/SunflowerPetals';
 import { SunflowerIcon } from '@/components/ui/SunflowerIcon';
 import { ChevronDown, Sparkles, Heart } from 'lucide-react';
 
@@ -50,9 +49,6 @@ export default function ScrapbookPage() {
 
   return (
     <div className="min-h-screen paper-texture text-stone-800 pb-24 relative overflow-x-hidden">
-      {/* Falling Sunflower Petals Animation Background */}
-      <SunflowerPetals />
-
       {/* Navigation Header */}
       <Navbar activeChapter={activeChapter} onSelectChapter={scrollToChapter} />
 
@@ -60,11 +56,17 @@ export default function ScrapbookPage() {
       <section className="relative max-w-4xl mx-auto px-4 pt-12 pb-16 text-center">
         <div className="relative inline-block bg-white p-6 sm:p-10 rounded-xs polaroid-shadow border border-stone-200 transform -rotate-1">
           <Tape color="bg-amber-200/90 border-amber-300" position="top-center" />
+
+          {/* Stationary Sunflower Pins on Hero Cover */}
+          <div className="absolute -top-6 -left-6 z-20">
+            <SunflowerSticker size={52} rotation="-rotate-12" />
+          </div>
+          <div className="absolute -bottom-6 -right-6 z-20">
+            <SunflowerSticker size={56} rotation="rotate-12" />
+          </div>
           
           <div className="flex items-center justify-center gap-2 mb-3">
-            <SunflowerIcon size={36} className="animate-spin-slow" />
             <Stamp text="PRIVATE MEMORY ALBUM" color="border-amber-700 text-amber-800" />
-            <SunflowerIcon size={36} className="animate-spin-slow" />
           </div>
 
           <h1 className="text-4xl sm:text-6xl font-bold font-handwriting text-stone-800 mb-3 tracking-tight">
@@ -94,8 +96,13 @@ export default function ScrapbookPage() {
               className="scroll-mt-20 relative"
             >
               {/* Chapter Header Banner */}
-              <div className={`relative p-6 sm:p-8 rounded-lg scrapbook-shadow bg-gradient-to-r ${chapter.bgGradient} border border-amber-200/60 mb-10`}>
+              <div className={`relative p-6 sm:p-8 rounded-lg scrapbook-shadow bg-gradient-to-r ${chapter.bgGradient} border border-amber-200/60 mb-10 overflow-hidden`}>
                 <Tape color={chapter.tapeColor} position="top-left" />
+
+                {/* Stationary Sunflower Accent in Chapter Banner */}
+                <div className="absolute -right-3 -bottom-3 opacity-90 pointer-events-none">
+                  <SunflowerSticker size={64} rotation={chapter.id % 2 === 0 ? "rotate-12" : "-rotate-6"} />
+                </div>
 
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-amber-300/40 pb-3 mb-3">
                   <span className={`inline-block px-3 py-1 rounded-full text-xs font-mono font-bold ${chapter.stickerBg} w-fit`}>
@@ -106,8 +113,8 @@ export default function ScrapbookPage() {
                   </span>
                 </div>
 
-                <h2 className="text-3xl sm:text-4xl font-bold font-handwriting text-stone-900">
-                  {chapter.title}
+                <h2 className="text-3xl sm:text-4xl font-bold font-handwriting text-stone-900 flex items-center gap-3">
+                  <span>{chapter.title}</span>
                 </h2>
                 <p className="font-handwriting text-xl text-stone-700 mt-1 italic">
                   "{chapter.tagline}"
