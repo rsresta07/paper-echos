@@ -22,8 +22,9 @@ export const PolaroidCard: React.FC<PolaroidCardProps> = ({ memory }) => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
+            videoEl.muted = false;
             videoEl.play().catch(() => {
-              // If unmuted autoplay is blocked by browser policy, try muted
+              // If unmuted autoplay is blocked by browser policy, try muted first
               videoEl.muted = true;
               videoEl.play().catch(() => {});
             });
@@ -32,11 +33,24 @@ export const PolaroidCard: React.FC<PolaroidCardProps> = ({ memory }) => {
           }
         });
       },
-      { threshold: 0.5 }
+      { threshold: 0.3 }
     );
 
+    // Dynamic gesture listener to unmute video once user interacts with page
+    const unlockVideoSound = () => {
+      if (videoEl && !videoEl.paused && videoEl.muted) {
+        videoEl.muted = false;
+      }
+    };
+    window.addEventListener('click', unlockVideoSound, { capture: true });
+    window.addEventListener('touchstart', unlockVideoSound, { capture: true });
+
     observer.observe(videoEl);
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('click', unlockVideoSound, { capture: true });
+      window.removeEventListener('touchstart', unlockVideoSound, { capture: true });
+    };
   }, [memory.type, activePhotoIndex]);
 
   const rotationClass = {

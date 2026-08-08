@@ -11,7 +11,7 @@ export const MusicPlayer: React.FC = () => {
   React.useEffect(() => {
     const playAudio = () => {
       if (audioRef.current) {
-        audioRef.current.muted = false;
+        audioRef.current.volume = 0.8;
         audioRef.current
           .play()
           .then(() => {
@@ -24,21 +24,26 @@ export const MusicPlayer: React.FC = () => {
       }
     };
 
+    // Attempt autoplay immediately
     playAudio();
 
-    // Also attempt playing on any user tap/click anywhere on page if blocked
-    const handleFirstTouch = () => {
-      playAudio();
-      window.removeEventListener('click', handleFirstTouch);
-      window.removeEventListener('touchstart', handleFirstTouch);
+    // Browser policy fallback: unlock and play audio on ANY user click, touch, key, or scroll gesture
+    const handleGesture = () => {
+      if (audioRef.current && audioRef.current.paused) {
+        playAudio();
+      }
     };
 
-    window.addEventListener('click', handleFirstTouch);
-    window.addEventListener('touchstart', handleFirstTouch);
+    window.addEventListener('click', handleGesture, { capture: true });
+    window.addEventListener('touchstart', handleGesture, { capture: true });
+    window.addEventListener('keydown', handleGesture, { capture: true });
+    window.addEventListener('scroll', handleGesture, { capture: true, once: true });
 
     return () => {
-      window.removeEventListener('click', handleFirstTouch);
-      window.removeEventListener('touchstart', handleFirstTouch);
+      window.removeEventListener('click', handleGesture, { capture: true });
+      window.removeEventListener('touchstart', handleGesture, { capture: true });
+      window.removeEventListener('keydown', handleGesture, { capture: true });
+      window.removeEventListener('scroll', handleGesture, { capture: true });
     };
   }, []);
 
