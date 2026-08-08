@@ -22,9 +22,11 @@ export const PolaroidCard: React.FC<PolaroidCardProps> = ({ memory }) => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
+            // Attempt unmuted play first
             videoEl.muted = false;
             videoEl.play().catch(() => {
-              // If unmuted autoplay is blocked by browser policy, try muted first
+              // Browser blocked unmuted autoplay on initial render/reload;
+              // play muted, but setup event listeners to unmute on user interaction
               videoEl.muted = true;
               videoEl.play().catch(() => {});
             });
@@ -36,17 +38,18 @@ export const PolaroidCard: React.FC<PolaroidCardProps> = ({ memory }) => {
       { threshold: 0.3 }
     );
 
-    // Dynamic gesture listener to unmute video once user interacts with page (click, scroll, mouse movement)
+    // Unmute video on any gesture if it was muted due to browser policy
     const unlockVideoSound = () => {
       if (videoEl && videoEl.muted) {
         videoEl.muted = false;
+        videoEl.volume = 1.0;
       }
     };
     window.addEventListener('click', unlockVideoSound, { capture: true });
     window.addEventListener('touchstart', unlockVideoSound, { capture: true });
     window.addEventListener('pointerdown', unlockVideoSound, { capture: true });
-    window.addEventListener('mousemove', unlockVideoSound, { capture: true, once: true });
-    window.addEventListener('scroll', unlockVideoSound, { capture: true, once: true });
+    window.addEventListener('mousemove', unlockVideoSound, { capture: true });
+    window.addEventListener('scroll', unlockVideoSound, { capture: true });
 
     observer.observe(videoEl);
     return () => {
