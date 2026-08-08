@@ -61,7 +61,6 @@ export const PolaroidCard: React.FC<PolaroidCardProps> = ({ memory }) => {
     window.addEventListener('click', unlockVideoSound, { capture: true });
     window.addEventListener('touchstart', unlockVideoSound, { capture: true });
     window.addEventListener('pointerdown', unlockVideoSound, { capture: true });
-    window.addEventListener('scroll', unlockVideoSound, { capture: true });
     window.addEventListener('keydown', unlockVideoSound, { capture: true });
 
     observer.observe(videoEl);
@@ -70,7 +69,6 @@ export const PolaroidCard: React.FC<PolaroidCardProps> = ({ memory }) => {
       window.removeEventListener('click', unlockVideoSound, { capture: true });
       window.removeEventListener('touchstart', unlockVideoSound, { capture: true });
       window.removeEventListener('pointerdown', unlockVideoSound, { capture: true });
-      window.removeEventListener('scroll', unlockVideoSound, { capture: true });
       window.removeEventListener('keydown', unlockVideoSound, { capture: true });
     };
   }, [memory.type, activePhotoIndex]);

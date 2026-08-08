@@ -1,14 +1,15 @@
 "use client";
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Volume2, VolumeX, Music } from 'lucide-react';
 
 export const MusicPlayer: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [hasAudio, setHasAudio] = useState(false);
+  const [needsGesture, setNeedsGesture] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
 
@@ -18,9 +19,11 @@ export const MusicPlayer: React.FC = () => {
         await audio.play();
         setIsPlaying(true);
         setHasAudio(true);
+        setNeedsGesture(false);
       } catch (err) {
-        console.log("Autoplay waiting for user interaction:", err);
+        console.log("Autoplay waiting for user gesture:", err);
         setIsPlaying(false);
+        setNeedsGesture(true);
       }
     };
 
@@ -29,27 +32,23 @@ export const MusicPlayer: React.FC = () => {
     playAudio();
 
     // Interaction fallback for browsers blocking unmuted autoplay on initial load/reload
-    const handleGesture = () => {
-      if (audio && audio.paused) {
-        audio.currentTime = 0;
+    const handleUserActivation = () => {
+      if (audioRef.current && audioRef.current.paused) {
+        audioRef.current.currentTime = 0;
         playAudio();
       }
     };
 
-    window.addEventListener('click', handleGesture, { capture: true });
-    window.addEventListener('touchstart', handleGesture, { capture: true });
-    window.addEventListener('pointerdown', handleGesture, { capture: true });
-    window.addEventListener('scroll', handleGesture, { capture: true });
-    window.addEventListener('wheel', handleGesture, { capture: true });
-    window.addEventListener('keydown', handleGesture, { capture: true });
+    window.addEventListener('click', handleUserActivation, { once: true, capture: true });
+    window.addEventListener('touchstart', handleUserActivation, { once: true, capture: true });
+    window.addEventListener('pointerdown', handleUserActivation, { once: true, capture: true });
+    window.addEventListener('keydown', handleUserActivation, { once: true, capture: true });
 
     return () => {
-      window.removeEventListener('click', handleGesture, { capture: true });
-      window.removeEventListener('touchstart', handleGesture, { capture: true });
-      window.removeEventListener('pointerdown', handleGesture, { capture: true });
-      window.removeEventListener('scroll', handleGesture, { capture: true });
-      window.removeEventListener('wheel', handleGesture, { capture: true });
-      window.removeEventListener('keydown', handleGesture, { capture: true });
+      window.removeEventListener('click', handleUserActivation, { capture: true });
+      window.removeEventListener('touchstart', handleUserActivation, { capture: true });
+      window.removeEventListener('pointerdown', handleUserActivation, { capture: true });
+      window.removeEventListener('keydown', handleUserActivation, { capture: true });
     };
   }, []);
 
@@ -60,6 +59,7 @@ export const MusicPlayer: React.FC = () => {
     if (isPlaying) {
       audio.pause();
       setIsPlaying(false);
+      setNeedsGesture(false);
     } else {
       audio.currentTime = 0; // Play from the beginning when turning on
       audio.volume = 0.8;
@@ -68,6 +68,7 @@ export const MusicPlayer: React.FC = () => {
         .then(() => {
           setIsPlaying(true);
           setHasAudio(true);
+          setNeedsGesture(false);
         })
         .catch((err) => {
           console.log("Audio playback error:", err);
@@ -77,7 +78,15 @@ export const MusicPlayer: React.FC = () => {
   };
 
   return (
-    <div className="fixed bottom-4 right-4 z-50">
+    <div className="fixed bottom-4 right-4 z-50 flex flex-col items-end gap-2">
+      {needsGesture && !isPlaying && (
+        <div 
+          onClick={toggleMusic}
+          className="bg-amber-100 text-amber-900 text-[11px] font-mono px-3 py-1.5 rounded-lg border border-amber-300 shadow-md animate-bounce cursor-pointer"
+        >
+          🎵 Tap anywhere to start music
+        </div>
+      )}
       <audio 
         ref={audioRef} 
         src="/media/audio/Taylor-Swift-august.mp3" 
@@ -89,7 +98,9 @@ export const MusicPlayer: React.FC = () => {
       <button
         onClick={toggleMusic}
         aria-label="Toggle background music"
-        className="flex items-center gap-2 bg-stone-900/90 text-amber-100 hover:text-white px-3 py-2 rounded-full text-xs font-mono shadow-lg border border-amber-400/30 backdrop-blur-sm transition-all hover:scale-105 active:scale-95 cursor-pointer"
+        className={`flex items-center gap-2 bg-stone-900/90 text-amber-100 hover:text-white px-3 py-2 rounded-full text-xs font-mono shadow-lg border border-amber-400/30 backdrop-blur-sm transition-all hover:scale-105 active:scale-95 cursor-pointer ${
+          needsGesture && !isPlaying ? 'ring-2 ring-rose-400 animate-pulse' : ''
+        }`}
       >
         <Music className={`w-3.5 h-3.5 ${isPlaying ? 'animate-spin text-rose-400' : ''}`} />
         <span>{isPlaying ? 'Music: ON' : 'Music: OFF'}</span>
