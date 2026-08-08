@@ -1,69 +1,140 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import React, { useState, useEffect } from 'react';
+import { CHAPTERS } from '@/content/chapters';
+import { MEMORIES } from '@/content/memories';
+import { QUOTES } from '@/content/quotes';
+import { PolaroidCard } from '@/components/scrapbook/PolaroidCard';
+import { QuoteCard } from '@/components/scrapbook/QuoteCard';
+import { BirthdayReveal } from '@/components/scrapbook/BirthdayReveal';
+import { Tape, Doodle, Stamp } from '@/components/scrapbook/Decorations';
+import { Navbar } from '@/components/navigation/Navbar';
+import { MusicPlayer } from '@/components/navigation/MusicPlayer';
+import { ChevronDown, Sparkles, Heart } from 'lucide-react';
+
+export default function ScrapbookPage() {
+  const [activeChapter, setActiveChapter] = useState(1);
+
+  const scrollToChapter = (chapterId: number) => {
+    setActiveChapter(chapterId);
+    const element = document.getElementById(`chapter-${chapterId}`);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  // Sync active chapter based on scroll position
+  useEffect(() => {
+    const handleScroll = () => {
+      const chapterElements = CHAPTERS.map((ch) => ({
+        id: ch.id,
+        el: document.getElementById(`chapter-${ch.id}`),
+      }));
+
+      const scrollPosition = window.scrollY + 200;
+
+      for (let i = chapterElements.length - 1; i >= 0; i--) {
+        const item = chapterElements[i];
+        if (item.el && item.el.offsetTop <= scrollPosition) {
+          setActiveChapter(item.id);
+          break;
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
+    <div className="min-h-screen paper-texture text-stone-800 pb-24">
+      {/* Navigation Header */}
+      <Navbar activeChapter={activeChapter} onSelectChapter={scrollToChapter} />
+
+      {/* Hero Welcome Cover */}
+      <section className="relative max-w-4xl mx-auto px-4 pt-12 pb-16 text-center">
+        <div className="relative inline-block bg-white p-6 sm:p-10 rounded-xs polaroid-shadow border border-stone-200 transform -rotate-1">
+          <Tape color="bg-amber-200/90 border-amber-300" position="top-center" />
+          
+          <Stamp text="PRIVATE MEMORY ALBUM" color="border-amber-700 text-amber-800" className="mb-4" />
+
+          <h1 className="text-4xl sm:text-6xl font-bold font-handwriting text-stone-800 mb-3 tracking-tight">
+            Whispers of Our Favorite Moments
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="font-handwriting text-xl sm:text-2xl text-stone-600 max-w-xl mx-auto leading-relaxed">
+            A small digital corner filled with photos, chaotic notes, funny quotes, and quiet memories.
           </p>
+
+          <div className="mt-8 flex justify-center items-center gap-2 text-stone-400 font-mono text-xs animate-bounce">
+            <span>Scroll down to turn the pages</span>
+            <ChevronDown className="w-4 h-4" />
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+      </section>
+
+      {/* Storyline Chapters */}
+      <div className="max-w-5xl mx-auto px-4 space-y-24">
+        {CHAPTERS.map((chapter) => {
+          const chapterMemories = MEMORIES.filter((m) => m.chapterId === chapter.id);
+          const chapterQuotes = QUOTES.filter((q) => q.chapterId === chapter.id);
+
+          return (
+            <section
+              key={chapter.id}
+              id={`chapter-${chapter.id}`}
+              className="scroll-mt-20 relative"
+            >
+              {/* Chapter Header Banner */}
+              <div className={`relative p-6 sm:p-8 rounded-lg scrapbook-shadow bg-gradient-to-r ${chapter.bgGradient} border border-amber-200/60 mb-10`}>
+                <Tape color={chapter.tapeColor} position="top-left" />
+
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-amber-300/40 pb-3 mb-3">
+                  <span className={`inline-block px-3 py-1 rounded-full text-xs font-mono font-bold ${chapter.stickerBg} w-fit`}>
+                    CHAPTER {chapter.id}
+                  </span>
+                  <span className="font-mono text-xs text-stone-500">
+                    {chapter.subtitle}
+                  </span>
+                </div>
+
+                <h2 className="text-3xl sm:text-4xl font-bold font-handwriting text-stone-900">
+                  {chapter.title}
+                </h2>
+                <p className="font-handwriting text-xl text-stone-700 mt-1 italic">
+                  "{chapter.tagline}"
+                </p>
+              </div>
+
+              {/* Grid of Chapter Memories & Quotes */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+                {/* Render Memories */}
+                {chapterMemories.map((mem) => (
+                  <PolaroidCard key={mem.id} memory={mem} />
+                ))}
+
+                {/* Render Quotes */}
+                {chapterQuotes.map((q) => (
+                  <QuoteCard key={q.id} quoteItem={q} />
+                ))}
+              </div>
+
+              {/* Chapter 5 Special Birthday Reveal Section */}
+              {chapter.id === 5 && <BirthdayReveal />}
+            </section>
+          );
+        })}
+      </div>
+
+      {/* Footer */}
+      <footer className="mt-32 text-center text-xs font-mono text-stone-400 border-t border-stone-200/60 pt-8 max-w-xl mx-auto px-4">
+        <p>Made with ❤️ for {process.env.NEXT_PUBLIC_RECIPIENT_NAME || 'You'} • Private Digital Scrapbook</p>
+        <p className="mt-1 text-[11px] text-stone-400/80">
+          August 23rd • Keep the surprise safe
+        </p>
+      </footer>
+
+      {/* Optional Music Player */}
+      <MusicPlayer />
     </div>
   );
 }

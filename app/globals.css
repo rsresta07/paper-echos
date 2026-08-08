@@ -1,26 +1,46 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --font-sans: var(--font-inter), system-ui, sans-serif;
+    --font-handwriting: var(--font-caveat), var(--font-handwriting), cursive;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.font-handwriting {
+  font-family: var(--font-caveat), 'Caveat', 'Indie Flower', cursive;
+}
+
+/* Paper texture pattern using pure CSS radial gradients */
+.paper-texture {
+  background-color: #faf6ee;
+  background-image: 
+    radial-gradient(#e5decf 0.75px, transparent 0.75px), 
+    radial-gradient(#e5decf 0.75px, #faf6ee 0.75px);
+  background-size: 30px 30px;
+  background-position: 0 0, 15px 15px;
+}
+
+/* Torn paper edge effect */
+.torn-edge-bottom {
+  mask-image: radial-gradient(circle at 10px 100%, transparent 12px, black 13px);
+  mask-size: 20px 100%;
+}
+
+/* Scrapbook Shadows */
+.scrapbook-shadow {
+  box-shadow: 2px 8px 20px -3px rgba(60, 40, 20, 0.15), 0 2px 6px -1px rgba(0, 0, 0, 0.08);
+}
+
+.polaroid-shadow {
+  box-shadow: 0 10px 25px -5px rgba(45, 30, 15, 0.2), 0 4px 10px -2px rgba(0, 0, 0, 0.1);
+}
+
+/* Hide scrollbar for clean horizontal/tab scrolling */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
