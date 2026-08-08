@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import confetti from 'canvas-confetti';
 import { BIRTHDAY_MESSAGE } from '@/content/memories';
 import { Tape, Doodle, Stamp } from './Decorations';
+import { SunflowerIcon } from '@/components/ui/SunflowerIcon';
 import { Heart, Sparkles, Gift } from 'lucide-react';
 
 export const BirthdayReveal: React.FC = () => {
@@ -104,12 +105,18 @@ export const BirthdayReveal: React.FC = () => {
           </div>
 
           {/* Grand Final Floating Message */}
-          <div className="mt-12 p-6 bg-gradient-to-r from-rose-500 to-amber-500 text-white rounded-lg text-center shadow-md">
-            <h3 className="text-3xl sm:text-4xl font-extrabold font-handwriting tracking-wide">
-              Happy Birthday, {process.env.NEXT_PUBLIC_RECIPIENT_NAME || 'You'} ❤️
+          <div className="mt-12 p-6 bg-gradient-to-r from-rose-500 via-amber-500 to-yellow-500 text-white rounded-lg text-center shadow-md relative overflow-hidden">
+            <div className="absolute -left-2 -top-2 opacity-30">
+              <SunflowerIcon size={64} className="animate-spin-slow" />
+            </div>
+            <div className="absolute -right-2 -bottom-2 opacity-30">
+              <SunflowerIcon size={64} className="animate-spin-slow" />
+            </div>
+            <h3 className="text-3xl sm:text-4xl font-extrabold font-handwriting tracking-wide relative z-10">
+              Happy Birthday, {process.env.NEXT_PUBLIC_RECIPIENT_NAME || 'You'} 🌻❤️
             </h3>
-            <p className="text-rose-100 text-sm mt-1 font-sans">
-              Thank you for being the sweetest part of every single day.
+            <p className="text-amber-100 text-sm mt-1 font-sans relative z-10">
+              Thank you for being the sweetest, brightest part of every single day.
             </p>
           </div>
         </div>

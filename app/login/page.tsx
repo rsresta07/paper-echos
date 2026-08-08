@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Lock, KeyRound, ArrowRight, ShieldCheck } from 'lucide-react';
 import { Stamp, Tape } from '@/components/scrapbook/Decorations';
+import { SunflowerIcon } from '@/components/ui/SunflowerIcon';
 
 export default function LoginPage() {
   const [passcode, setPasscode] = useState('');
@@ -55,8 +56,9 @@ export default function LoginPage() {
         <Tape color="bg-amber-200/90 border-amber-300" position="top-center" />
 
         <div className="text-center mb-6">
-          <div className="inline-flex p-3 bg-amber-100 rounded-full text-amber-800 mb-3 border border-amber-300">
-            <Lock className="w-6 h-6" />
+          <div className="inline-flex items-center gap-2 p-3 bg-amber-100/80 rounded-full text-amber-800 mb-3 border border-amber-300/80">
+            <Lock className="w-5 h-5" />
+            <SunflowerIcon size={24} className="animate-spin-slow" />
           </div>
 
           <Stamp text="PRIVATE ARCHIVE" color="border-amber-700 text-amber-800" className="mb-3" />

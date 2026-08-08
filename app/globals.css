@@ -44,3 +44,37 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* Sunflower Floating Petals Animation */
+@keyframes floatPetal {
+  0% {
+    transform: translateY(-10vh) rotate(0deg) translateX(0px);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.85;
+  }
+  50% {
+    transform: translateY(50vh) rotate(180deg) translateX(30px);
+  }
+  85% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translateY(105vh) rotate(360deg) translateX(-25px);
+    opacity: 0;
+  }
+}
+
+.animate-float-petal {
+  animation: floatPetal linear infinite;
+}
+
+@keyframes spinSlow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spinSlow 18s linear infinite;
+}

@@ -10,6 +10,8 @@ import { BirthdayReveal } from '@/components/scrapbook/BirthdayReveal';
 import { Tape, Doodle, Stamp } from '@/components/scrapbook/Decorations';
 import { Navbar } from '@/components/navigation/Navbar';
 import { MusicPlayer } from '@/components/navigation/MusicPlayer';
+import { SunflowerPetals } from '@/components/effects/SunflowerPetals';
+import { SunflowerIcon } from '@/components/ui/SunflowerIcon';
 import { ChevronDown, Sparkles, Heart } from 'lucide-react';
 
 export default function ScrapbookPage() {
@@ -47,7 +49,10 @@ export default function ScrapbookPage() {
   }, []);
 
   return (
-    <div className="min-h-screen paper-texture text-stone-800 pb-24">
+    <div className="min-h-screen paper-texture text-stone-800 pb-24 relative overflow-x-hidden">
+      {/* Falling Sunflower Petals Animation Background */}
+      <SunflowerPetals />
+
       {/* Navigation Header */}
       <Navbar activeChapter={activeChapter} onSelectChapter={scrollToChapter} />
 
@@ -56,7 +61,11 @@ export default function ScrapbookPage() {
         <div className="relative inline-block bg-white p-6 sm:p-10 rounded-xs polaroid-shadow border border-stone-200 transform -rotate-1">
           <Tape color="bg-amber-200/90 border-amber-300" position="top-center" />
           
-          <Stamp text="PRIVATE MEMORY ALBUM" color="border-amber-700 text-amber-800" className="mb-4" />
+          <div className="flex items-center justify-center gap-2 mb-3">
+            <SunflowerIcon size={36} className="animate-spin-slow" />
+            <Stamp text="PRIVATE MEMORY ALBUM" color="border-amber-700 text-amber-800" />
+            <SunflowerIcon size={36} className="animate-spin-slow" />
+          </div>
 
           <h1 className="text-4xl sm:text-6xl font-bold font-handwriting text-stone-800 mb-3 tracking-tight">
             Whispers of Our Favorite Moments
