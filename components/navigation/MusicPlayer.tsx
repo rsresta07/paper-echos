@@ -28,24 +28,28 @@ export const MusicPlayer: React.FC = () => {
     audio.currentTime = 0;
     playAudio();
 
-    // One-time gesture listener for browsers blocking unmuted autoplay on initial load/reload
-    const handleFirstGesture = () => {
+    // Interaction fallback for browsers blocking unmuted autoplay on initial load/reload
+    const handleGesture = () => {
       if (audio && audio.paused) {
         audio.currentTime = 0;
         playAudio();
       }
     };
 
-    window.addEventListener('click', handleFirstGesture, { once: true, capture: true });
-    window.addEventListener('touchstart', handleFirstGesture, { once: true, capture: true });
-    window.addEventListener('pointerdown', handleFirstGesture, { once: true, capture: true });
-    window.addEventListener('keydown', handleFirstGesture, { once: true, capture: true });
+    window.addEventListener('click', handleGesture, { capture: true });
+    window.addEventListener('touchstart', handleGesture, { capture: true });
+    window.addEventListener('pointerdown', handleGesture, { capture: true });
+    window.addEventListener('scroll', handleGesture, { capture: true });
+    window.addEventListener('wheel', handleGesture, { capture: true });
+    window.addEventListener('keydown', handleGesture, { capture: true });
 
     return () => {
-      window.removeEventListener('click', handleFirstGesture, { capture: true });
-      window.removeEventListener('touchstart', handleFirstGesture, { capture: true });
-      window.removeEventListener('pointerdown', handleFirstGesture, { capture: true });
-      window.removeEventListener('keydown', handleFirstGesture, { capture: true });
+      window.removeEventListener('click', handleGesture, { capture: true });
+      window.removeEventListener('touchstart', handleGesture, { capture: true });
+      window.removeEventListener('pointerdown', handleGesture, { capture: true });
+      window.removeEventListener('scroll', handleGesture, { capture: true });
+      window.removeEventListener('wheel', handleGesture, { capture: true });
+      window.removeEventListener('keydown', handleGesture, { capture: true });
     };
   }, []);
 
