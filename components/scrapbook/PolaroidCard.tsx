@@ -36,20 +36,26 @@ export const PolaroidCard: React.FC<PolaroidCardProps> = ({ memory }) => {
       { threshold: 0.3 }
     );
 
-    // Dynamic gesture listener to unmute video once user interacts with page
+    // Dynamic gesture listener to unmute video once user interacts with page (click, scroll, mouse movement)
     const unlockVideoSound = () => {
-      if (videoEl && !videoEl.paused && videoEl.muted) {
+      if (videoEl && videoEl.muted) {
         videoEl.muted = false;
       }
     };
     window.addEventListener('click', unlockVideoSound, { capture: true });
     window.addEventListener('touchstart', unlockVideoSound, { capture: true });
+    window.addEventListener('pointerdown', unlockVideoSound, { capture: true });
+    window.addEventListener('mousemove', unlockVideoSound, { capture: true, once: true });
+    window.addEventListener('scroll', unlockVideoSound, { capture: true, once: true });
 
     observer.observe(videoEl);
     return () => {
       observer.disconnect();
       window.removeEventListener('click', unlockVideoSound, { capture: true });
       window.removeEventListener('touchstart', unlockVideoSound, { capture: true });
+      window.removeEventListener('pointerdown', unlockVideoSound, { capture: true });
+      window.removeEventListener('mousemove', unlockVideoSound, { capture: true });
+      window.removeEventListener('scroll', unlockVideoSound, { capture: true });
     };
   }, [memory.type, activePhotoIndex]);
 
