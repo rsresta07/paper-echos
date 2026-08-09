@@ -26,9 +26,9 @@ export const QuoteCard: React.FC<QuoteCardProps> = ({ quoteItem }) => {
     personal: "bg-purple-100 text-purple-800 border-purple-300"
   }[quoteItem.type];
 
-  const badgeLabel = {
-    said: "That's what she said 💬",
-    likes: "Quotes She Loves ✨",
+  const badgeLabel = quoteItem.customBadge || {
+    said: "Things She Said 💬",
+    likes: "Special Words ✨",
     personal: "Personal Thought 💭"
   }[quoteItem.type];
 

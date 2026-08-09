@@ -2,6 +2,7 @@ export interface QuoteItem {
   id: string;
   chapterId: number;
   type: 'said' | 'likes' | 'personal';
+  customBadge?: string;
   quote: string;
   context?: string;
   date?: string;
@@ -34,6 +35,7 @@ export const QUOTES: QuoteItem[] = [
     id: "q-3",
     chapterId: 2,
     type: "likes",
+    customBadge: "A Memory Reminder 📷",
     quote: "We take photos as a return ticket to a moment otherwise gone.",
     context: "Anaïs Nin • Why we made this scrapbook",
     date: "A sentiment we live by",
@@ -62,6 +64,7 @@ export const QUOTES: QuoteItem[] = [
     id: "q-6",
     chapterId: 4,
     type: "likes",
+    customBadge: "Special Sentiment ✨",
     quote: "In all the world, there is no heart for me like yours. In all the world, there is no love for you like mine.",
     context: "Maya Angelou",
     rotation: 1,
