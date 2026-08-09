@@ -34,10 +34,9 @@ export const QUOTES: QuoteItem[] = [
     id: "q-3",
     chapterId: 2,
     type: "likes",
-    // TODO: add her quote here
     quote: "We take photos as a return ticket to a moment otherwise gone.",
-    context: "Favorite saved quote on her notes app",
-    date: "Saved note",
+    context: "Anaïs Nin • Why we made this scrapbook",
+    date: "A sentiment we live by",
     rotation: -1,
     tapePosition: "top-center"
   },
