@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import confetti from 'canvas-confetti';
 import { BIRTHDAY_MESSAGE } from '@/content/memories';
 import { Tape, Doodle, Stamp, SunflowerSticker } from './Decorations';
@@ -39,22 +39,18 @@ export const BirthdayReveal: React.FC = () => {
       {!opened ? (
         <div className="bg-gradient-to-br from-amber-100 to-rose-100 border-2 border-dashed border-rose-300 p-8 rounded-lg scrapbook-shadow text-center relative overflow-hidden">
           <Tape color="bg-yellow-300/90 border-yellow-400" position="top-center" />
-          
+
           <div className="absolute top-3 right-3 z-10">
             <SunflowerSticker size={48} rotation="rotate-12" />
           </div>
 
-          <div className="inline-flex p-4 bg-white/80 rounded-full shadow-sm mb-4 text-rose-500 animate-bounce">
-            <Gift className="w-10 h-10" />
-          </div>
-
-          <Stamp text="CONFIDENTIAL • FOR HER EYES ONLY" color="border-rose-400 text-rose-700" className="mb-4" />
+          <Stamp text="CONFIDENTIAL • FOR YOUR EYES ONLY" color="border-rose-400 text-rose-700" className="mb-4" />
 
           <h2 className="text-3xl font-bold font-handwriting text-stone-800 mb-2">
             The Final Surprise Envelope
           </h2>
           <p className="font-handwriting text-xl text-stone-600 mb-6">
-            You've made it through all the chaotic notes, silly photos, and quiet memories. Click below to open your letter!
+            You&apos;ve made it through all the chaotic notes, silly photos, and quiet memories. Click below to open your letter!
           </p>
 
           <button
@@ -84,7 +80,7 @@ export const BirthdayReveal: React.FC = () => {
           </div>
 
           <p className="font-handwriting text-xl text-amber-900/90 font-medium mb-6 leading-relaxed bg-amber-50/80 p-4 rounded-md border border-amber-200/60 italic">
-            "{BIRTHDAY_MESSAGE.subtitle}"
+            &ldquo;{BIRTHDAY_MESSAGE.subtitle}&rdquo;
           </p>
 
           <div className="space-y-4 font-handwriting text-xl text-stone-700 leading-relaxed">
@@ -101,10 +97,6 @@ export const BirthdayReveal: React.FC = () => {
               <span className="text-2xl font-bold font-handwriting text-rose-600 block">
                 {BIRTHDAY_MESSAGE.sender}
               </span>
-            </div>
-
-            <div className="text-center sm:text-right">
-              <Stamp text={`HAPPY BIRTHDAY ${process.env.NEXT_PUBLIC_RECIPIENT_NAME?.toUpperCase() || 'YOU'} ❤️`} color="border-rose-500 text-rose-600" />
             </div>
           </div>
 

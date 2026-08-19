@@ -2,9 +2,8 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Lock, KeyRound, ArrowRight, ShieldCheck } from 'lucide-react';
-import { Stamp, Tape, SunflowerSticker } from '@/components/scrapbook/Decorations';
-import { SunflowerIcon } from '@/components/ui/SunflowerIcon';
+import { Lock, KeyRound, ArrowRight } from 'lucide-react';
+import { Tape, SunflowerSticker } from '@/components/scrapbook/Decorations';
 
 export default function LoginPage() {
   const [passcode, setPasscode] = useState('');
@@ -42,7 +41,7 @@ export default function LoginPage() {
       } else {
         setError(data.error || 'Incorrect passcode. Try again.');
       }
-    } catch (err) {
+    } catch {
       setError('An error occurred. Please try again.');
     } finally {
       setLoading(false);
@@ -64,21 +63,13 @@ export default function LoginPage() {
             <Lock className="w-5 h-5" />
           </div>
 
-          <Stamp text="PRIVATE ARCHIVE" color="border-amber-700 text-amber-800" className="mb-3" />
-
           <h1 className="text-2xl font-bold font-sans text-stone-800 tracking-tight">
             Restricted Entry
           </h1>
-          <p className="text-sm font-mono text-stone-600 mt-1">
-            Enter the private passcode to unlock this collection.
-          </p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-xs font-mono text-stone-700 uppercase tracking-wider mb-1">
-              Passcode
-            </label>
             <div className="relative">
               <input
                 type="password"
@@ -107,11 +98,6 @@ export default function LoginPage() {
             <ArrowRight className="w-4 h-4" />
           </button>
         </form>
-
-        <div className="mt-8 pt-4 border-t border-amber-200/60 flex items-center justify-center gap-2 text-xs font-mono text-stone-400">
-          <ShieldCheck className="w-4 h-4" />
-          <span>Protected Private Vault</span>
-        </div>
       </div>
     </main>
   );

@@ -27,17 +27,17 @@ export const QuoteCard: React.FC<QuoteCardProps> = ({ quoteItem }) => {
   }[quoteItem.type];
 
   const badgeLabel = quoteItem.customBadge || {
-    said: "Things She Said 💬",
+    said: "That's What She Said 💬",
     likes: "Special Words ✨",
     personal: "Personal Thought 💭"
   }[quoteItem.type];
 
   return (
-    <div 
+    <div
       className={`relative bg-amber-50/90 border border-amber-200/80 p-6 rounded-sm scrapbook-shadow transition-transform hover:scale-[1.02] duration-300 ${rotationClass}`}
     >
       <Tape color="bg-rose-200/80 border-rose-300" position={quoteItem.tapePosition || "top-right"} />
-      
+
       <div className="flex justify-between items-center mb-3">
         <span className={`text-xs px-2.5 py-0.5 rounded-full border font-mono font-medium ${badgeStyle}`}>
           {badgeLabel}
@@ -45,8 +45,8 @@ export const QuoteCard: React.FC<QuoteCardProps> = ({ quoteItem }) => {
         <Quote className="w-5 h-5 text-amber-400 opacity-60" />
       </div>
 
-      <p className="font-handwriting text-2xl text-stone-800 leading-relaxed font-semibold italic">
-        "{quoteItem.quote}"
+      <p className="font-handwriting text-2xl text-stone-800 leading-relaxed font-semibold italic whitespace-pre-line">
+        &ldquo;{quoteItem.quote}&rdquo;
       </p>
 
       {quoteItem.context && (

@@ -7,11 +7,10 @@ import { QUOTES } from '@/content/quotes';
 import { PolaroidCard } from '@/components/scrapbook/PolaroidCard';
 import { QuoteCard } from '@/components/scrapbook/QuoteCard';
 import { BirthdayReveal } from '@/components/scrapbook/BirthdayReveal';
-import { Tape, Doodle, Stamp, SunflowerSticker } from '@/components/scrapbook/Decorations';
+import { Tape, Stamp, SunflowerSticker } from '@/components/scrapbook/Decorations';
 import { Navbar } from '@/components/navigation/Navbar';
 import { MusicPlayer } from '@/components/navigation/MusicPlayer';
-import { SunflowerIcon } from '@/components/ui/SunflowerIcon';
-import { ChevronDown, Sparkles, Heart } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 
 export default function ScrapbookPage() {
   const [activeChapter, setActiveChapter] = useState(1);
@@ -64,7 +63,7 @@ export default function ScrapbookPage() {
           <div className="absolute -bottom-6 -right-6 z-20">
             <SunflowerSticker size={56} rotation="rotate-12" />
           </div>
-          
+
           <div className="flex items-center justify-center gap-2 mb-3">
             <Stamp text="PRIVATE MEMORY ALBUM" color="border-amber-700 text-amber-800" />
           </div>
@@ -75,11 +74,6 @@ export default function ScrapbookPage() {
           <p className="font-handwriting text-xl sm:text-2xl text-stone-600 max-w-xl mx-auto leading-relaxed">
             A small digital corner filled with photos, chaotic notes, funny quotes, and quiet memories.
           </p>
-
-          <div className="mt-8 flex justify-center items-center gap-2 text-stone-400 font-mono text-xs animate-bounce">
-            <span>Scroll down to turn the pages</span>
-            <ChevronDown className="w-4 h-4" />
-          </div>
         </div>
       </section>
 
@@ -117,7 +111,7 @@ export default function ScrapbookPage() {
                   <span>{chapter.title}</span>
                 </h2>
                 <p className="font-handwriting text-xl text-stone-700 mt-1 italic">
-                  "{chapter.tagline}"
+                  &ldquo;{chapter.tagline}&rdquo;
                 </p>
               </div>
 

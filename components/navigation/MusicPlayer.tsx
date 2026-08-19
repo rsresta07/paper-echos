@@ -5,7 +5,6 @@ import { Volume2, VolumeX, Music } from 'lucide-react';
 
 export const MusicPlayer: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [hasAudio, setHasAudio] = useState(false);
   const [needsGesture, setNeedsGesture] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -18,7 +17,6 @@ export const MusicPlayer: React.FC = () => {
         audio.volume = 0.8;
         await audio.play();
         setIsPlaying(true);
-        setHasAudio(true);
         setNeedsGesture(false);
       } catch (err) {
         console.log("Autoplay waiting for user gesture:", err);
@@ -67,7 +65,6 @@ export const MusicPlayer: React.FC = () => {
         .play()
         .then(() => {
           setIsPlaying(true);
-          setHasAudio(true);
           setNeedsGesture(false);
         })
         .catch((err) => {
@@ -93,7 +90,6 @@ export const MusicPlayer: React.FC = () => {
         autoPlay
         loop 
         preload="auto"
-        onCanPlay={() => setHasAudio(true)}
       />
       <button
         onClick={toggleMusic}

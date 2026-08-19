@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { CHAPTERS } from '@/content/chapters';
-import { BookOpen, LogOut, Heart } from 'lucide-react';
+import { BookOpen, LogOut } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
 interface NavbarProps {
