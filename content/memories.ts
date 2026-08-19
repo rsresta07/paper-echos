@@ -132,7 +132,7 @@ export const MEMORIES: MemoryItem[] = [
     chapterId: 3,
     type: "image",
     title: "Let me capture your soul",
-    caption: "The look you gave at that moment made me forget my surrounding.",
+    caption: "The look you gave at that moment made me forget my surroundings.",
     date: "Spring Afternoon",
     location: "Somewhere",
     mediaUrl: "/media/images/stare.jpg", // [ADD MEMORY PHOTO]
@@ -161,7 +161,7 @@ export const MEMORIES: MemoryItem[] = [
     chapterId: 3,
     type: "note",
     title: "Things I Noticed About You",
-    caption: "How you tuck your hair when concentrating, how your eyes crinkle when you laugh, and how you make everyone around you feel comfortable instantly.",
+    caption: "How your eyes get so big when you see something you love, how you get awkward and don't know what to say when I say something sus and how you make everyone around you feel comfortable instantly.",
     date: "Quiet observation",
     rotation: -1,
     stickers: ["💭", "🌷"]
@@ -202,7 +202,7 @@ export const MEMORIES: MemoryItem[] = [
     chapterId: 4,
     type: "note",
     title: "10 Reasons Why You're Amazing",
-    caption: "1. Your kindness. 2. Your laughter. 3. Your endless patience. 4. How genuine you are. 5. The way you listen. 6. Your contagious energy. 7. Your warm hugs. 8. Your smart brain. 9. Your beautiful soul. 10. Just being YOU.",
+    caption: "1. Your kindness. 2. Your laughter. 3. How genuine you are. 4. Your energy. 5. Your warm hugs. 6. Your smart brain. 7. Your beautiful soul. 8. Just being YOU.",
     date: "From the bottom of my heart",
     rotation: 2,
     stickers: ["📜", "💖"]
@@ -214,9 +214,9 @@ export const MEMORIES: MemoryItem[] = [
     chapterId: 5,
     type: "image",
     title: "The Birthday Star ✨",
-    caption: `To the girl who turns ordinary days into magical memories. Happy Birthday, ${process.env.NEXT_PUBLIC_RECIPIENT_NAME || 'You'}!`,
+    caption: `To the girl who turns ordinary days into magical memories. Happy Birthday, ${process.env.NEXT_PUBLIC_RECIPIENT_NAME || 'My Love'}!`,
     date: "August 23",
-    mediaUrl: "/media/images/my-hero.jpeg", // [ADD BIRTHDAY/SPECIAL PHOTO]
+    mediaUrl: "/media/images/my-hero.jpeg",
     placeholderLabel: "[ADD SPECIAL BIRTHDAY / HERO PHOTO]",
     mediaType: "portrait",
     rotation: 0,
@@ -227,18 +227,21 @@ export const MEMORIES: MemoryItem[] = [
 ];
 
 const recipient = process.env.NEXT_PUBLIC_RECIPIENT_NAME || 'You';
+const recipient_nickname = process.env.NEXT_PUBLIC_RECIPIENT_NICKNAME || 'You';
+const sender = process.env.NEXT_PUBLIC_SENDER_NAME || 'Me';
 
 export const BIRTHDAY_MESSAGE = {
   recipient: recipient,
   date: "August 23",
-  title: "Happy Birthday, My Love ❤️",
+  title: `Happy Birthday, ${recipient_nickname}`,
   subtitle: "Here's to another year of laughter, adventures, late-night talks, and endless memories together.",
   paragraphs: [
     "From the moment we started sharing small moments, funny inside jokes, and random silly conversations, my world got immeasurably brighter.",
     "You have this effortless ability to bring warmth and joy everywhere you go. Thank you for being my favorite person, my best friend, and the person who makes every single day special.",
     "On your birthday, I want to remind you how deeply loved, appreciated, and cherished you are. Today and every day, I hope your heart is filled with as much happiness as you give to everyone around you.",
-    `Happy Birthday, ${recipient}! Today is all about celebrating YOU! 🎂✨`
+    "Don't call yourself sad girl today please.",
+    `Happy Birthday, ${recipient}! 🎂✨`
   ],
   closing: "Forever & Always,",
-  sender: "With all my love ❤️"
+  sender: `With all my love, ${sender}`
 };

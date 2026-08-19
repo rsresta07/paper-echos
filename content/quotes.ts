@@ -38,7 +38,6 @@ export const QUOTES: QuoteItem[] = [
     customBadge: "A Memory Reminder 📷",
     quote: "We take photos as a return ticket to a moment otherwise gone.",
     context: "Anaïs Nin • Why we made this scrapbook",
-    date: "A sentiment we live by",
     rotation: -1,
     tapePosition: "top-center"
   },
@@ -46,7 +45,7 @@ export const QUOTES: QuoteItem[] = [
     id: "q-4",
     chapterId: 3,
     type: "personal",
-    quote: "You have a way of turning ordinary days into something I want to remember forever.",
+    quote: "You make me feel like I am home.",
     context: "A quiet thought from late evening walks",
     rotation: 2,
     tapePosition: "top-right"
@@ -55,7 +54,7 @@ export const QUOTES: QuoteItem[] = [
     id: "q-5",
     chapterId: 4,
     type: "said",
-    quote: "Look at the sky right now! Quickly, before it changes color!",
+    quote: "Uh hera... kasto ramro aakash!\nEh mula, herni mero kaam ho, timi bato hera!",
     context: "Mid-conversation sunset alert",
     rotation: -3,
     tapePosition: "top-left"

@@ -33,7 +33,7 @@ export const CHAPTERS: Chapter[] = [
   {
     id: 3,
     title: "Chapter III: The Quiet Shifts",
-    subtitle: "When Funny Turn Into Unforgettable",
+    subtitle: "When Funny Turns Into Unforgettable",
     tagline: "Somewhere between all the laughter, things got warm and steady.",
     theme: "transition",
     bgGradient: "from-rose-50 to-stone-100/80",
