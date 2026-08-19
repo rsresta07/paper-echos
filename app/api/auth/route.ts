@@ -64,7 +64,7 @@ export async function GET(req: NextRequest) {
   try {
     await jwtVerify(token, JWT_SECRET);
     return NextResponse.json({ authenticated: true });
-  } catch (err) {
+  } catch {
     return NextResponse.json({ authenticated: false }, { status: 401 });
   }
 }
