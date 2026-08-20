@@ -26,13 +26,18 @@ To ensure the surprise remains completely secret:
 3. **Web Audio Unlock**: Submitting the login form warms up browser `AudioContext` and sets up global user-gesture listeners (`click`, `touchstart`, `pointerdown`, `keydown`) to enable unmuted video & background music playback seamlessly without browser restrictions or state flickering on reload.
 4. **Client Security**: Passcodes are **never** exposed in client-side JS bundles.
 
-### Changing Environment Variables & Recipient Name
+### Changing Environment Variables & Personalization Settings
 Update `.env.local` (or Vercel Environment Variables in production):
 
 ```env
+# Access & Session Security
 SITE_PASSCODE=your_custom_secret_passcode
 JWT_SECRET=your_random_secret_jwt_signing_key
+
+# Recipient & Sender Personalization
 NEXT_PUBLIC_RECIPIENT_NAME=NameOfRecipient
+NEXT_PUBLIC_RECIPIENT_NICKNAME=Nickname
+NEXT_PUBLIC_SENDER_NAME=YourNameOrNickname
 ```
 
 ---
@@ -69,6 +74,7 @@ paper-echoes/
 │   │   └── audio/             # Background music (Taylor-Swift-august.mp3)
 │   └── robots.txt             # Disallow search engine crawlers
 ├── .env.example
+├── .env.local
 ├── README.md
 └── WALKTHROUGH.md
 ```
@@ -179,7 +185,9 @@ Open `content/quotes.ts` and add quotes under the appropriate category (`said`, 
 3. Under **Environment Variables**, add:
    - `SITE_PASSCODE`: Set your secret passcode.
    - `JWT_SECRET`: Set a long random string.
-   - `NEXT_PUBLIC_RECIPIENT_NAME`: Set the name of the recipient.
+   - `NEXT_PUBLIC_RECIPIENT_NAME`: Set the name of the recipient (e.g., `Swariya`).
+   - `NEXT_PUBLIC_RECIPIENT_NICKNAME`: Set the recipient's nickname (e.g., `Swa:`).
+   - `NEXT_PUBLIC_SENDER_NAME`: Set your name/nickname (e.g., `Dabba`).
 4. Deploy! Your deployed URL will look like `https://paper-echoes.vercel.app` — giving away zero details about the surprise.
 
 ---
@@ -193,6 +201,6 @@ Open `content/quotes.ts` and add quotes under the appropriate category (`said`, 
 - [x] Viewport video autoplay with sound and automatic playback reset on view.
 - [x] Background music player with persistent browser audio unlock.
 - [x] Stationary 3D sunflower stickers and paper decor.
-- [x] Personalization via `NEXT_PUBLIC_RECIPIENT_NAME`.
+- [x] Personalization via `NEXT_PUBLIC_RECIPIENT_NAME`, `NEXT_PUBLIC_RECIPIENT_NICKNAME`, and `NEXT_PUBLIC_SENDER_NAME`.
 - [x] Responsive layout optimized for mobile touch screens.
 - [x] Smooth scroll chapter navigation and quick-lock feature.
