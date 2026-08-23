@@ -134,15 +134,6 @@ export default function ScrapbookPage() {
           );
         })}
       </div>
-
-      {/* Footer */}
-      <footer className="mt-32 text-center text-xs font-mono text-stone-400 border-t border-stone-200/60 pt-8 max-w-xl mx-auto px-4">
-        <p>Made with ❤️ for {process.env.NEXT_PUBLIC_RECIPIENT_NAME || 'You'} • Private Digital Scrapbook</p>
-        <p className="mt-1 text-[11px] text-stone-400/80">
-          August 23rd • Keep the surprise safe
-        </p>
-      </footer>
-
       {/* Optional Music Player */}
       <MusicPlayer />
     </div>
