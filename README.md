@@ -119,7 +119,7 @@ Polaroid cards support multi-item stack flipping! Tapping a polaroid smoothly fl
   items: [
     {
       mediaUrl: "/media/images/expression-1.jpg",
-      title: "Kahi pe til hai kahi pe nishana",
+      title: "kahi pe nigahe kahi par nishana",
       caption: "Targeting hearts with that sneaky, subtle glance 😉",
       date: "Captured live"
     },

@@ -96,7 +96,7 @@ export const MEMORIES: MemoryItem[] = [
     items: [
       {
         mediaUrl: "/media/images/expression-1.jpg",
-        title: "Kahi pe til hai kahi pe nishana",
+        title: "kahi pe nigahe kahi par nishana",
         caption: "Targeting hearts with that sneaky, subtle glance 😉",
         date: "Captured live"
       },
@@ -201,7 +201,7 @@ export const MEMORIES: MemoryItem[] = [
     id: "mem-12",
     chapterId: 4,
     type: "note",
-    title: "10 Reasons Why You're Amazing",
+    title: "8 Reasons Why You're Amazing",
     caption: "1. Your kindness. 2. Your laughter. 3. How genuine you are. 4. Your energy. 5. Your warm hugs. 6. Your smart brain. 7. Your beautiful soul. 8. Just being YOU.",
     date: "From the bottom of my heart",
     rotation: 2,
