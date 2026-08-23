@@ -25,22 +25,20 @@ export const MusicPlayer: React.FC = () => {
       }
     };
 
-    // Attempt to start audio from the beginning on mount
-    audio.currentTime = 0;
-    playAudio();
-
-    // Interaction fallback for browsers blocking unmuted autoplay on initial load/reload
+    // Global interaction listener for unmuted playback unlock
     const handleUserActivation = () => {
       if (audioRef.current && audioRef.current.paused) {
-        audioRef.current.currentTime = 0;
         playAudio();
       }
     };
 
-    window.addEventListener('click', handleUserActivation, { once: true, capture: true });
-    window.addEventListener('touchstart', handleUserActivation, { once: true, capture: true });
-    window.addEventListener('pointerdown', handleUserActivation, { once: true, capture: true });
-    window.addEventListener('keydown', handleUserActivation, { once: true, capture: true });
+    // Initial attempt to start audio
+    playAudio();
+
+    window.addEventListener('click', handleUserActivation, { capture: true });
+    window.addEventListener('touchstart', handleUserActivation, { capture: true });
+    window.addEventListener('pointerdown', handleUserActivation, { capture: true });
+    window.addEventListener('keydown', handleUserActivation, { capture: true });
 
     return () => {
       window.removeEventListener('click', handleUserActivation, { capture: true });
@@ -50,7 +48,8 @@ export const MusicPlayer: React.FC = () => {
     };
   }, []);
 
-  const toggleMusic = () => {
+  const toggleMusic = (e: React.MouseEvent) => {
+    e.stopPropagation();
     const audio = audioRef.current;
     if (!audio) return;
 
@@ -59,7 +58,6 @@ export const MusicPlayer: React.FC = () => {
       setIsPlaying(false);
       setNeedsGesture(false);
     } else {
-      audio.currentTime = 0; // Play from the beginning when turning on
       audio.volume = 0.8;
       audio
         .play()
@@ -87,9 +85,8 @@ export const MusicPlayer: React.FC = () => {
       <audio 
         ref={audioRef} 
         src="/media/audio/Taylor-Swift-august.mp3" 
-        autoPlay
         loop 
-        preload="auto"
+        preload="metadata"
       />
       <button
         onClick={toggleMusic}
@@ -105,3 +102,4 @@ export const MusicPlayer: React.FC = () => {
     </div>
   );
 };
+

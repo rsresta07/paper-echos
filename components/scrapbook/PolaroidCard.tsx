@@ -179,9 +179,10 @@ export const PolaroidCard: React.FC<PolaroidCardProps> = ({ memory }) => {
               ref={videoRef}
               src={currentPhoto} 
               controls 
-              autoPlay
-              loop
               playsInline
+              preload="metadata"
+              muted
+              loop
               className="w-full h-full object-cover"
               controlsList="nodownload"
             />
@@ -190,6 +191,7 @@ export const PolaroidCard: React.FC<PolaroidCardProps> = ({ memory }) => {
             <img 
               src={currentPhoto} 
               alt={currentTitle} 
+              loading="lazy"
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
           )
